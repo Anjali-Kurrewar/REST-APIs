@@ -1,7 +1,7 @@
-import express, {Request,Response, NextFunction} from 'express';
-import createHttpError, { HttpError } from 'http-errors';
-import { config } from './config/config';
+import express from 'express';
+import createHttpError from 'http-errors';
 import globalErrorHandler from './middleware/globalErrorHandler';
+import { createUser } from './user/userController';
  
 const app = express();
 
@@ -12,6 +12,8 @@ app.get('/',(req, res, next) => {
     throw error;
     res.json({message: "Welcome to the elib apis"})
 });
+
+app.use("/api/users", createUser);
 
 //Global error handler
 
