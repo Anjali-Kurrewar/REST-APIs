@@ -2,6 +2,7 @@ import express from 'express';
 import createHttpError from 'http-errors';
 import globalErrorHandler from './middleware/globalErrorHandler';
 import { createUser } from './user/userController';
+import {createBook} from "./book/bookController"
  
 const app = express();
 
@@ -14,6 +15,7 @@ app.get('/',(req, res, next) => {
 });
 
 app.use("/api/users", createUser);
+app.use("/api/books", createBook);
 
 //Global error handler
 

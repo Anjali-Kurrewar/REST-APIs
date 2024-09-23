@@ -50,6 +50,37 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
    } catch (error) {
     return next(createHttpError(500,"Error while signing the jwt token."))
    }
+};
+
+const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+    const {email, password} = req.body;
+    if (!email || !password) {
+        return next(createHttpError(500,"All fields are required."));
+    }
+    let user : User | null;
+    try {
+         user = await userModel.findOne({email});
+    if(!user){
+        return next(createHttpError(500,"User not found."));
+    }
+    } catch (error) {
+        return next(createHttpError(500, "Error while finding user"));
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if(!isMatch) {
+        return next(createHttpError(500, "Username or password incorrect"));
+    }
+
+    //Create accesstoken 
+    try {
+        const token = sign({sub: user._id},config.jwtSecret as string,{
+            expiresIn: "7d",
+            algorithm: "HS256"});
+        res.json({accessToken: token});
+       } catch (error) {
+        return next(createHttpError(500,"Error while signing  the jwt token."))
+       }
 }
 
-export {createUser};
+export {createUser,loginUser};
