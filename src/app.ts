@@ -5,7 +5,7 @@ import { createUser } from './user/userController';
  
 const app = express();
 
-
+app.use(express.json());
 //Router
 app.get('/',(req, res, next) => {
     const error = createHttpError(400,"Something went wrong");
