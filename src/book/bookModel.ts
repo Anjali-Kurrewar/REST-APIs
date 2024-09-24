@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 import {Book} from "./booksVariety";
 
-const booksSchema = new  mongoose.Schema<Book> ({
+const booksSchema = new  mongoose.Schema<Book>({
     title: {
         type: String,
-        required: true,
+        required: true
     },
     author: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true
     },
-    coverimage: {
+    coverImage: {
         type: String,
         required: true
     },
@@ -21,7 +22,7 @@ const booksSchema = new  mongoose.Schema<Book> ({
     genre: {
         type: String,
         required: true
-    }
+    },
 },
 {timestamps: true}
 );

@@ -10,9 +10,10 @@ const upload = multer({
     limits: {fileSize: 3e7} //30MB
 })
 
+
 bookRouter.post("/",upload.fields([
-    {name: "coverimage", maxCount: 1},
-    {name: "file", maxCount:1}
+    {name: "coverImage", maxCount: 1},
+    {name: "file", maxCount: 1},
 ]), createBook);
 
 export default bookRouter;
