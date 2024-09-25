@@ -3,9 +3,15 @@ import createHttpError from 'http-errors';
 import globalErrorHandler from './middleware/globalErrorHandler';
 import bookRouter from './book/bookRouter';
 import userRouter from './user/userRouter';
+import cors from 'cors';
+import { config } from './config/config';
  
 const app = express();
 
+app.use(cors({
+    origin: config.frontendDomain ,
+
+}));
 app.use(express.json());
 //Router
 app.get('/',(req, res, next) => {
