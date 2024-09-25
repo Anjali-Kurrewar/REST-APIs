@@ -2,7 +2,8 @@ import express from 'express';
 import createHttpError from 'http-errors';
 import globalErrorHandler from './middleware/globalErrorHandler';
 import { createUser } from './user/userController';
-import {createBook} from "./book/bookController"
+import bookRouter from './book/bookRouter';
+import userRouter from './user/userRouter';
  
 const app = express();
 
@@ -14,8 +15,8 @@ app.get('/',(req, res, next) => {
     res.json({message: "Welcome to the elib apis"})
 });
 
-app.use("/api/users", createUser);
-app.use("/api/books", createBook);
+app.use("/api/users", userRouter);
+app.use("/api/books", bookRouter);
 
 //Global error handler
 
