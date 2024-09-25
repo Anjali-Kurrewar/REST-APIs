@@ -1,7 +1,6 @@
 import express from 'express';
 import createHttpError from 'http-errors';
 import globalErrorHandler from './middleware/globalErrorHandler';
-import { createUser } from './user/userController';
 import bookRouter from './book/bookRouter';
 import userRouter from './user/userRouter';
  
